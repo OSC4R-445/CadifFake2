@@ -11,6 +11,20 @@ import {
   IonicModule // Módulo que provee todos los componentes como IonCard, IonHeader, etc.
 } from '@ionic/angular';
 
+// *** Implementación de addIcons para asegurar la visibilidad ***
+import { addIcons } from 'ionicons';
+import { 
+  addCircleOutline, // Asumo este para el botón de "Agregar"
+  personCircleOutline, // Para Action Sheet
+  settingsOutline,     // Para Action Sheet
+  logOutOutline,       // Para Action Sheet
+  close,               // Para Action Sheet (Cancelar)
+  albums,
+  videocamOutline,
+  bookmarkOutline,
+  logoYoutube,
+} from 'ionicons/icons';
+
 // Interfaz para la estructura de datos del video (Requerimiento 4)
 interface Video {
   titulo: string;
@@ -60,7 +74,20 @@ export class HomePage implements OnInit {
     private alertController: AlertController,
     private toastController: ToastController,
     private actionSheetController: ActionSheetController
-  ) {}
+  ) {
+    // *** Llamada para registrar los iconos en el constructor ***
+    addIcons({ 
+      addCircleOutline, 
+      personCircleOutline, 
+      settingsOutline, 
+      logOutOutline, 
+      close,
+      videocamOutline,
+      bookmarkOutline,
+      albums,
+      logoYoutube,
+    });
+  }
 
   ngOnInit() {
     // Lógica de inicialización
@@ -119,27 +146,15 @@ export class HomePage implements OnInit {
     await toast.present();
   }
 
-  // --- REQUERIMIENTO 5: ion-action-sheet (Botón del header) ---
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({
-      header: 'Opciones de Usuario',
+      header: 'Opciones',
       subHeader: 'Selecciona una acción:',
       buttons: [
-        {
-          text: 'Mi Perfil',
-          icon: 'person-circle-outline',
-          handler: () => { console.log('Mi Perfil seleccionado'); }
-        },
         {
           text: 'Configuración',
           icon: 'settings-outline',
           handler: () => { console.log('Configuración seleccionada'); }
-        },
-        {
-          text: 'Cerrar Sesión',
-          role: 'destructive',
-          icon: 'log-out-outline',
-          handler: () => { console.log('Cerrar Sesión seleccionado'); }
         },
         {
           text: 'Cancelar', // Requerimiento: Dejar un botón de "cancel"
