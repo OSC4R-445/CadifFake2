@@ -14,18 +14,18 @@ import {
 // *** Implementación de addIcons para asegurar la visibilidad ***
 import { addIcons } from 'ionicons';
 import { 
-  addCircleOutline, // Asumo este para el botón de "Agregar"
-  personCircleOutline, // Para Action Sheet
-  settingsOutline,     // Para Action Sheet
-  logOutOutline,       // Para Action Sheet
-  close,               // Para Action Sheet (Cancelar)
+  addCircleOutline,
+  personCircleOutline, 
+  settingsOutline,     
+  logOutOutline,       
+  close,               
   albums,
   videocamOutline,
   bookmarkOutline,
   logoYoutube,
 } from 'ionicons/icons';
 
-// Interfaz para la estructura de datos del video (Requerimiento 4)
+// Interfaz para la estructura de datos del video
 interface Video {
   titulo: string;
   asesor: string;
@@ -51,7 +51,7 @@ interface Video {
 })
 export class HomePage implements OnInit {
   
-  // Datos simulados para las ion-card (Requerimiento 4)
+  // Datos simulados para las ion-card
   public videos: Video[] = [
     {
       titulo: 'Introducción a Angular',
@@ -93,7 +93,7 @@ export class HomePage implements OnInit {
     // Lógica de inicialización
   }
 
-  // --- REQUERIMIENTO 2: ion-alert personalizado (Botón del header) ---
+  // --- ion-alert personalizado (Botón del header) ---
   async presentCustomAlert() {
     const alert = await this.alertController.create({
       header: '¡Alerta Personalizada!',
@@ -105,7 +105,7 @@ export class HomePage implements OnInit {
     await alert.present();
   }
 
-  // --- REQUERIMIENTO 3: ion-toast (Al presionar ion-segment) ---
+  // --- ion-toast (Al presionar ion-segment) ---
   async segmentChanged(event: Event) {
     // Asegurar el tipo de evento para obtener el detalle
     const customEvent = event as SegmentCustomEvent;
@@ -123,7 +123,7 @@ export class HomePage implements OnInit {
     await toast.present();
   }
   
-  // --- REQUERIMIENTO 4: ion-alert (Al presionar el primer ion-chip) ---
+  // --- ion-alert (Al presionar el primer ion-chip) ---
   async showAlertForChip(chipName: string) {
     const alert = await this.alertController.create({
       header: 'Tema Seleccionado',
@@ -134,7 +134,7 @@ export class HomePage implements OnInit {
     await alert.present();
   }
 
-  // --- REQUERIMIENTO 4: ion-toast (Al presionar el segundo ion-chip) ---
+  // --- ion-toast (Al presionar el segundo ion-chip) ---
   async showToastForChip(chipName: string) {
     const toast = await this.toastController.create({
       message: `Tema seleccionado: **${chipName}**. Esto activa un ion-toast.`,
@@ -146,6 +146,7 @@ export class HomePage implements OnInit {
     await toast.present();
   }
 
+  // --- ion-action-sheet (Botón del header) ---
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Opciones',
