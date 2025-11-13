@@ -1,0 +1,48 @@
+.pregunta-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+ion-card {
+  margin: 16px 0;
+}
+
+.enunciado {
+  font-size: 1.1em;
+  margin-bottom: 20px;
+  color: var(--ion-color-dark);
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+ion-list {
+  background: transparent;
+}
+
+ion-item {
+  --background: transparent;
+  --padding-start: 0;
+  margin: 12px 0;
+  --border-radius: 8px;
+  
+  ion-radio {
+    margin: 0 16px 0 8px;
+  }
+  
+  ion-label {
+    white-space: normal !important;
+  }
+}
+
+ion-footer {
+  ion-toolbar {
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --background: var(--ion-background-color);
+  }
+}
+
+// Estilos para los botones de navegación
+ion-button[disabled] {
+  opacity: 0.5;
+}
