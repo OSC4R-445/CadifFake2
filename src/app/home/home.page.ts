@@ -23,6 +23,7 @@ import {
   videocamOutline,
   bookmarkOutline,
   logoYoutube,
+  schoolOutline // *** Nuevo icono para el desafío teórico ***
 } from 'ionicons/icons';
 
 // Interfaz para la estructura de datos del video
@@ -86,6 +87,7 @@ export class HomePage implements OnInit {
       bookmarkOutline,
       albums,
       logoYoutube,
+      schoolOutline // *** Nuevo icono registrado ***
     });
   }
 
@@ -111,6 +113,12 @@ export class HomePage implements OnInit {
     const customEvent = event as SegmentCustomEvent;
     // Obtener el valor del segmento seleccionado (ej: 'Material', 'Videos', 'Desafios')
     const segmentValue = customEvent.detail.value; 
+    
+    // *** Nueva funcionalidad: Redirección al segmento Desafios ***
+    if (segmentValue === 'Desafios') {
+      this.irAExamen();
+      return; // No mostrar toast si redirige
+    }
     
     // Imprimir el nombre del botón del ion-segment en el mensaje del toast
     const toast = await this.toastController.create({
@@ -152,6 +160,17 @@ export class HomePage implements OnInit {
       header: 'Opciones',
       subHeader: 'Selecciona una acción:',
       buttons: [
+        // *** Nueva opción: Presentar Desafío Teórico ***
+        {
+          text: 'Presentar Desafío Teórico',
+          icon: 'school-outline',
+          data: {
+            action: 'examen'
+          },
+          handler: () => {
+            this.irAExamen();
+          }
+        },
         {
           text: 'Configuración',
           icon: 'settings-outline',
@@ -167,5 +186,13 @@ export class HomePage implements OnInit {
     });
 
     await actionSheet.present();
+  }
+
+  // *** Nuevo método: Navegación a la página de examen ***
+  irAExamen() {
+    // Navegación programática a la página de examen
+    window.location.href = '/examen';
+    // Alternativa con Router si prefieres:
+    // this.router.navigate(['/examen']);
   }
 }

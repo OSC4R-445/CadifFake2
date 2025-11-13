@@ -19,19 +19,38 @@ ion-list {
   background: transparent;
 }
 
-ion-item {
+// *** Estilos para hacer toda la opción clickeable ***
+.opcion-item {
   --background: transparent;
   --padding-start: 0;
-  margin: 12px 0;
+  margin: 8px 0;
   --border-radius: 8px;
+  --inner-padding-end: 0;
   
+  // Asegurar que el radio tenga buen tamaño
   ion-radio {
     margin: 0 16px 0 8px;
+    width: 20px;
+    height: 20px;
   }
   
   ion-label {
     white-space: normal !important;
+    padding: 12px 0;
+    flex: 1;
   }
+  
+  // Efecto visual cuando está seleccionada
+  &.item-radio-checked {
+    background: rgba(var(--ion-color-primary-rgb), 0.1);
+    border-left: 4px solid var(--ion-color-primary);
+  }
+}
+
+// *** Mejorar el área clickeable del radio ***
+ion-radio::part(container) {
+  width: 24px;
+  height: 24px;
 }
 
 ion-footer {

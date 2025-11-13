@@ -8,7 +8,7 @@
     <ion-title>Desafío Teórico</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="presentActionSheet()">
-        <ion-icon slot="icon-only" name="add"></ion-icon>
+        <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -29,22 +29,26 @@
             [value]="respuestas[preguntas[indice].id]"
             (ionChange)="onOptionSelect(preguntas[indice].id, $event.detail.value)">
             
-            <ion-item>
+            <!-- *** Opción 1 con área clickeable mejorada *** -->
+            <ion-item class="opcion-item" button (click)="seleccionarOpcion('option1')">
               <ion-radio slot="start" value="option1"></ion-radio>
               <ion-label class="ion-text-wrap">{{ preguntas[indice].option1 }}</ion-label>
             </ion-item>
             
-            <ion-item>
+            <!-- *** Opción 2 con área clickeable mejorada *** -->
+            <ion-item class="opcion-item" button (click)="seleccionarOpcion('option2')">
               <ion-radio slot="start" value="option2"></ion-radio>
               <ion-label class="ion-text-wrap">{{ preguntas[indice].option2 }}</ion-label>
             </ion-item>
             
-            <ion-item>
+            <!-- *** Opción 3 con área clickeable mejorada *** -->
+            <ion-item class="opcion-item" button (click)="seleccionarOpcion('option3')">
               <ion-radio slot="start" value="option3"></ion-radio>
               <ion-label class="ion-text-wrap">{{ preguntas[indice].option3 }}</ion-label>
             </ion-item>
             
-            <ion-item>
+            <!-- *** Opción 4 con área clickeable mejorada *** -->
+            <ion-item class="opcion-item" button (click)="seleccionarOpcion('option4')">
               <ion-radio slot="start" value="option4"></ion-radio>
               <ion-label class="ion-text-wrap">{{ preguntas[indice].option4 }}</ion-label>
             </ion-item>

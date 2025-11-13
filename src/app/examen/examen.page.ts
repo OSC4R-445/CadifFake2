@@ -1,7 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule, ActionSheetController, AlertController } from '@ionic/angular';
+import { IonicModule, ActionSheetController, AlertController, IonRadioGroup } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
+
+// *** Implementación de addIcons para asegurar la visibilidad ***
+import { addIcons } from 'ionicons';
+import { 
+  close,
+  addCircleOutline,
+  exitOutline,
+  schoolOutline,
+  chevronBack,
+  chevronForward,
+  flag
+} from 'ionicons/icons';
 
 @Component({
   selector: 'app-examen',
@@ -11,6 +23,8 @@ import { RouterModule } from '@angular/router';
   imports: [CommonModule, IonicModule, RouterModule]
 })
 export class ExamenPage implements OnInit {
+  @ViewChild(IonRadioGroup) radioGroup!: IonRadioGroup;
+
   indice: number = 0;
   preguntas: any[] = [
     {
@@ -61,7 +75,18 @@ export class ExamenPage implements OnInit {
   constructor(
     private actionSheetCtrl: ActionSheetController,
     private alertController: AlertController
-  ) { }
+  ) { 
+    // *** Llamada para registrar los iconos en el constructor ***
+    addIcons({ 
+      close,
+      addCircleOutline,
+      exitOutline,
+      schoolOutline,
+      chevronBack,
+      chevronForward,
+      flag
+    });
+  }
 
   ngOnInit() {
     this.actualizarEstado();
@@ -117,6 +142,7 @@ export class ExamenPage implements OnInit {
     await alert.present();
   }
 
+  // *** ion-action-sheet para el header (Botón con add-circle-outline) ***
   async presentActionSheet() {
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'Opciones del Desafío',
@@ -124,7 +150,7 @@ export class ExamenPage implements OnInit {
         {
           text: 'Abandonar Desafío Teórico',
           role: 'destructive',
-          icon: 'exit',
+          icon: 'exit-outline',
           data: {
             action: 'abandonar',
           },
@@ -143,6 +169,17 @@ export class ExamenPage implements OnInit {
     });
 
     await actionSheet.present();
+  }
+
+  // *** Método para manejar la selección desde el click del item ***
+  seleccionarOpcion(opcion: string) {
+    const preguntaActual = this.preguntas[this.indice];
+    this.respuestas[preguntaActual.id] = opcion;
+    
+    // Forzar la actualización del radio group
+    if (this.radioGroup) {
+      this.radioGroup.value = opcion;
+    }
   }
 
   onOptionSelect(preguntaId: number, opcion: string) {
